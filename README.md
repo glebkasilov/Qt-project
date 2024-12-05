@@ -1,4 +1,4 @@
-# PyQt-Flask-Integration-Example
+# Yandexlyceum-PyQTproject-glebkasilov
 
 This simple project demonstrates an integration between a PyQt6 and a Flask backend with AI-texnology.  The PyQt application acts as a client, communicating with a Flask server to save some data in the internet.
 
