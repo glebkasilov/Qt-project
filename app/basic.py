@@ -16,19 +16,21 @@ class Main_Window(QMainWindow):
         self.actionOpen_window_login.triggered.connect(self.login_window)
 
         self.generate_button.clicked.connect(self.gerate_picture)
+        
+        self.feedback_button.clicked.connect(self.feedback_window)
 
         self.id_request = 0
 
         self.flag_is_ready_picture = True
 
     def gerate_picture(self):
-        if not self.photo_generate_key.isChecked():
+        if not self.checkBox.isChecked():
             text_to_generate = self.plainTextEdit.toPlainText()
             if text_to_generate == "" or text_to_generate == "Describe image you want here, for example: An astronaut riding a green horse":
                 self.picture.setText("Invalid request")
                 self.picture.setFont(QtGui.QFont('MS Shell Dlg 2', 14))
                 self.picture.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
+                
             else:
                 if self.flag_is_ready_picture:
                     global id_request
@@ -44,6 +46,8 @@ class Main_Window(QMainWindow):
             self.picture.setText("There is no connection to server")
             self.picture.setFont(QtGui.QFont('MS Shell Dlg 2', 14))
             self.picture.setAlignment(Qt.AlignmentFlag.AlignCenter)
+            print("Invalid request")
+            self.error_window()
 
     def generate_picture_function(self) -> None:
         self.picture.setText("Ready")
@@ -61,9 +65,13 @@ class Main_Window(QMainWindow):
                 self.picture.setFont(QtGui.QFont('MS Shell Dlg 2', 14))
                 self.picture.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
+                print("Invalid request")
+                self.error_window()
+                
                 PictureRepository.add_picture(
                     {"id_picture": id, "login": login, "directory": '-'})
                 return
+                
 
             else:
                 img_data = requests.get(image_url).content
@@ -93,3 +101,13 @@ class Main_Window(QMainWindow):
         self.login_wn = Window()
         self.login_wn.show()
         Main_Window.hide(self)
+
+    def error_window(self):
+        from app.dialog_windows.error import Error_Window
+        self.error_wn = Error_Window()
+        self.error_wn.show()
+    
+    def feedback_window(self):
+        from app.dialog_windows.feedback import Feedback_Window
+        self.feedback_wn = Feedback_Window()
+        self.feedback_wn.show()
