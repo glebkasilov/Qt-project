@@ -15,16 +15,17 @@ This is my simple project in Yandex Lyceum to show what I have learned here also
 ## Prerequisites
 
 * Python 3.7 or higher
-* requests: `pip install requests`
+* requirements: `pip install -r requirements.txt`
 
 ## Start
-    ```bash
-    python -m app
-    ```
+```bash
+python -m app
+```
 
 ## Setup
 
 1. **Clone the repository:**
+
    ```bash
-   git clone https://github.com/glebkasilov/Yandex-qt-project
+   git clone https://github.com/glebkasilov/Yandex-qt-project.git
    ```
